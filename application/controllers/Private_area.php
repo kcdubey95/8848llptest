@@ -82,7 +82,7 @@ class Private_area extends CI_Controller
     // exit();
     $school_name = $this->input->post('school_name');
     $school_location = $this->input->post('school_location');
-    $school_id =$this->input->post('school_id');
+    $school_id = $this->input->post('school_id');
     // $inputCity = $this->input->post('inputCity');
     // $inputState = $this->input->post('inputState');
     if ($school_id) {
@@ -92,23 +92,21 @@ class Private_area extends CI_Controller
       );
       $this->db->where('id', $school_id);
       $this->db->update('school_list', $data);
-    }
-    else{ 
+    } else {
       $data = array(
         'school_name' => $school_name,
         'school_location' => $school_location,
         // 'city' => $inputCity,
         // 'state' => $inputState,  
-      );  
+      );
       $qurey = $this->db->insert('school_list', $data);
     }
   }
-  public function delete_school(){
-  
+  public function delete_school()
+  {
+
     $school_id = $this->uri->segment(3);
     $this->db->where('id', $school_id);
-   $this->db->delete('school_list');
-   
-    
+    $this->db->delete('school_list');
   }
 }
