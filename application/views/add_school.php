@@ -117,7 +117,7 @@
             <div class="col-12">
               <div class="row">
                 <div class="col-md-6">
-                  <button id='submit' type="submit" class="btn btn-dark w-100 fw-bold">Send</button>
+                  <button id='submit' type="submit" class="btn btn-primary w-100 fw-bold">Send</button>
                 </div>
               </div>
             </div>
