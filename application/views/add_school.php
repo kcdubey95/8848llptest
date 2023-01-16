@@ -1,22 +1,4 @@
-<!-- <?php print_r($school_data[0]->school_name) ?> -->
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>School Information</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="https://8848digital.com/assets/images/favicon.ico">
-  <meta name="meta_title" content="seo">
-  <meta name="meta_keyword" content="seo">
-  <meta name="meta_description" content="seo">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/datatables.min.css" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/datatables.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <style>
     .dataTables_length,
@@ -33,33 +15,20 @@
       min-width: 4rem !important;
     }
   </style>
-</head>
 
-<body>
-
-  <div class="container my-5">
+  <div class="container my-5 space-top">
     <div class="row justify-content-center">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="<?php echo base_url() ?>schools">Home </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() ?>logout">Logout</a>
-            </li>
-
-          </ul>
-        </div>
-      </nav>
+      
       <div class="col-lg-9">
-        <h1 class="mb-3">School Information</h1>
-        <form>
+        <h1 class="mb-3 text-center">School Information</h1>
+        <form role="form" id="contactForm" class="contact-form" data-toggle="validator" class="shake">
+        <div class="alert alert-danger display-error" style="display: none"></div>
           <div class="row g-3">
             <input type="hidden" id="school_id" name="school_id" value="<?php echo $school_data[0]->id ?? '' ?>">
             <div class="col-md-6">
               <label for="school-name" class="form-label">School Name</label>
               <input type="text" class="form-control" id="school_name" name="school_name" value="<?php echo $school_data[0]->school_name ?? '' ?>" required>
+              <span class="text-danger"><?php echo form_error('school_name'); ?></span>
             </div>
             <div class="col-md-6">
               <label for="school-location" class="form-label">School Location</label>
@@ -128,7 +97,6 @@
   </div>
   <script>
     $("#inputState").change(function() {
-      debugger
       var formData = {
         'city': $("#inputState").val() //for get email 
       };
@@ -152,21 +120,22 @@
       var school_name = $("#school_name").val();
       var school_location = $("#school_location").val();
       var school_id = $("#school_id").val();
-      // var inputCity = $("#inputCity").val();
-      // var inputState = $("#inputState").val();
       if (school_name != '' && school_location != '') {
         $.post("<?php echo base_url() ?>/savedata", {
-
             school_name: school_name,
             school_location: school_location,
-            school_id: school_id,
-            // inputCity: inputCity,
-            // inputState: inputState,
+            school_id: school_id,       
 
           },
-          function(data, status) {
-
-            alert("Data: " + data + "\nStatus: " + status);
+          function(data) {
+debugger
+            response=JSON.parse(data);
+            if (response.code == "200"){
+                    alert("Success: " +response.msg);
+                } else {
+                    $(".display-error").html("<ul>"+response.msg+"</ul>");
+                    $(".display-error").css("display","block");
+                }
             location.reload();
           });
       } else {
@@ -174,6 +143,3 @@
       }
     });
   </script>
-</body>
-
-</html>

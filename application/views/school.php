@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,7 +16,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/datatables.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
 
   <style>
     table caption {
@@ -28,27 +28,15 @@
       white-space: nowrap;
     }
   </style>
-</head>
+<!-- </head>
 
-<body>
+<body> -->
 
-  <div class="container p-5 text-center">
+  <div class="container space-top  text-center">
     <h1>School Master</h1>
     <p>Get All school List</p>
     <div class="row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url()?>schools">Home </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"  href="<?php echo base_url()?>logout">Logout</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
+
       <div class="my-5">
         <a class="btn btn-sm btn-primary btn-edit me-1 px-2" role="button" href="schools/create">Add School</a>
         <div class="table-reponsive box">
@@ -72,7 +60,7 @@
                   <td><?php echo $row->city ?></td>
                   <td><?php echo $row->state ?></td>
                   <td> <a class="btn btn-sm btn-primary btn-edit me-1 px-2" role="button" href="<?php echo base_url() ?>schools/edit/<?php echo $row->id ?>">Edit</a>
-                    <button class="btn btn-sm btn-danger btn-delete px-2" type="submit" onclick="delete_school()" id="delete_school" value="<?php echo $row->id ?>">Delete</button>
+                    <button class="btn btn-sm btn-danger btn-delete px-2" type="submit" onclick="delete_school(<?php echo $row->id ?>)" id="delete_school" value="<?php echo $row->id ?>">Delete</button>
                   </td>
                 </tr>
               <?php } ?>
@@ -91,9 +79,9 @@
         });
       });
 
-      function delete_school() {
+      function delete_school(id) {
         event.preventDefault();
-        var school_id = $("#delete_school").val();
+        var school_id = id;
         var result = confirm("Want to delete?");
         if (result) {
           $.post("<?php echo base_url() ?>schools/delete/" + school_id, {
@@ -112,6 +100,6 @@
 
       }
     </script>
-</body>
+<!-- </body>
 
-</html>
+</html> -->

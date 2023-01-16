@@ -10,7 +10,7 @@ class Login_Controller extends CI_Controller {
   {
    redirect('private_area');
   }
-  $this->load->library('form_validation');
+ 
   $this->load->library('encryption');
   $this->load->model('login_model');
  }

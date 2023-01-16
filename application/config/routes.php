@@ -63,4 +63,5 @@ $route['savedata'] = 'Private_area/savedata';
 $route['schools/edit/:num'] = 'Private_area/create';
 $route['schools/delete/:num'] = 'Private_area/delete_school';
 $route['logout'] = 'Private_area/logout';
+$route['about'] = 'Private_area/about';
 

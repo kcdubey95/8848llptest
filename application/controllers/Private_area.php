@@ -9,35 +9,41 @@ class Private_area extends CI_Controller
     if (!$this->session->userdata('id')) {
       redirect('login');
     }
+    $this->load->model('Add_school_model');
   }
 
   function index()
   {
-    // echo '<br /><br /><br /><h1 align="center">Welcome User</h1>';
-    //echo '<p align="center"><a href="'.base_url().'private_area/logout">Logout</a></p>';
-
     $query = $this->db->get('school_list');
-    $data['schoollist'] = $query;
+    $page_data['schoollist'] = $query;
+    $page_data['title'] = 'School list';
+    $page_data['page'] = $this->load->view('school', $page_data,TRUE);
+    $this->load->view('index', $page_data);
 
-    $this->load->view('school', $data);
+  }
+  function about()
+  {
+    
+    $page_data['title'] = 'About Us';
+    $page_data['page'] = $this->load->view('about', $page_data,TRUE);
+    $this->load->view('index', $page_data);
+
   }
   function create()
   {
-
     if ($this->uri->segment(3)) {
       $school_id = $this->uri->segment(3);
       $this->db->where('id', $school_id);
       $query = $this->db->get('school_list');
-
       if ($query->num_rows() > 0) {
-
         $data['school_data'] = $query->result();
       }
-    } else {
-
-      $data = [];
-    }
-    $this->load->view('add_school', $data);
+      } else {
+        $data = [];
+      }
+      $page_data['title'] = 'Add School';
+    $page_data['page'] = $this->load->view('add_school', $data,TRUE);
+    $this->load->view('index', $page_data);
   }
   function logout()
   {
@@ -78,35 +84,42 @@ class Private_area extends CI_Controller
   public function savedata()
   {
     $this->load->database();
-    // echo"kc";
-    // exit();
+    
     $school_name = $this->input->post('school_name');
     $school_location = $this->input->post('school_location');
     $school_id = $this->input->post('school_id');
     // $inputCity = $this->input->post('inputCity');
-    // $inputState = $this->input->post('inputState');
-    if ($school_id) {
-      $data = array(
-        'school_name' => $school_name,
-        'school_location' => $school_location,
-      );
-      $this->db->where('id', $school_id);
-      $this->db->update('school_list', $data);
-    } else {
-      $data = array(
-        'school_name' => $school_name,
-        'school_location' => $school_location,
-        // 'city' => $inputCity,
-        // 'state' => $inputState,  
-      );
-      $qurey = $this->db->insert('school_list', $data);
+    // $inputState = $this->input->post('inputState');    
+    if (empty($school_name) || empty($school_location )) {
+      $errorMSG .= "<li>school information is required</li>"; 
+    }else{
+      if ($school_id) {
+        $data = array(
+          'school_name' => $school_name,
+          'school_location' => $school_location,
+          'id' => $school_id,
+        );
+        $result = $this->Add_school_model->update($data);
+      } else {
+        $data = array(
+          'school_name' => $school_name,
+          'school_location' => $school_location, 
+        );
+        $result = $this->Add_school_model->insert($data);      
+      }
+    }
+    if(empty($errorMSG)){
+      echo json_encode(['code'=>200, 'msg'=>'School name saved successfully']);
+      exit;
+    }
+    else{
+      echo json_encode(['code'=>404, 'msg'=>'Error ']);
     }
   }
   public function delete_school()
   {
+    $school_id = $this->input->post('school_id');
+    $result = $this->Add_school_model->delete( $school_id);
 
-    $school_id = $this->uri->segment(3);
-    $this->db->where('id', $school_id);
-    $this->db->delete('school_list');
   }
 }
