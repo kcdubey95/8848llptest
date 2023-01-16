@@ -36,7 +36,6 @@
     <h1>School Master</h1>
     <p>Get All school List</p>
     <div class="row">
-
       <div class="my-5">
         <a class="btn btn-sm btn-primary btn-edit me-1 px-2" role="button" href="schools/create">Add School</a>
         <div class="table-reponsive box">
@@ -85,15 +84,16 @@
         var result = confirm("Want to delete?");
         if (result) {
           $.post("<?php echo base_url() ?>schools/delete/" + school_id, {
-
-              school_id: school_id,
-              // inputCity: inputCity,
-              // inputState: inputState,
-
+              school_id: school_id,    
             },
-            function(data, status) {
-              alert("\nStatus: " + status);
+            function(data) {
+              response=JSON.parse(data);
+            if (response.code == "200"){
+              alert("Success: " +response.msg);
               location.reload();
+            }else {                  
+              alert("Error: " +response.msg);
+                }
             });
 
         }

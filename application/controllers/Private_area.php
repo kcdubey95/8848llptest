@@ -119,7 +119,15 @@ class Private_area extends CI_Controller
   public function delete_school()
   {
     $school_id = $this->input->post('school_id');
+    if ($school_id) {
     $result = $this->Add_school_model->delete( $school_id);
+    echo json_encode(['code'=>200, 'msg'=>'School Data Deleted successfully']);
+      exit;
+    }
+    else{
+      echo json_encode(['code'=>404, 'msg'=>'School Data Not Deleted successfully ']);
+    }
+
 
   }
 }
