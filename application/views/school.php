@@ -1,22 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>School Master</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="https://8848digital.com/assets/images/favicon.ico">
-  <meta name="meta_title" content="seo">
-  <meta name="meta_keyword" content="seo">
-  <meta name="meta_description" content="seo">
-
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/datatables.min.css" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/datatables.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
 
   <style>
     table caption {
@@ -35,9 +17,9 @@
   <div class="container space-top  text-center">
     <h1>School Master</h1>
     <p>Get All school List</p>
+    <a class="btn btn-sm btn-primary btn-edit me-1 px-2" role="button" href="schools/create">Add School</a>
     <div class="row">
       <div class="my-5">
-        <a class="btn btn-sm btn-primary btn-edit me-1 px-2" role="button" href="schools/create">Add School</a>
         <div class="table-reponsive box">
           <table id="example" class="table table-striped table-bordered">
             <thead>
@@ -100,6 +82,3 @@
 
       }
     </script>
-<!-- </body>
-
-</html> -->
