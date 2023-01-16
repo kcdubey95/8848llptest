@@ -41,7 +41,7 @@ class Register_Controller extends CI_Controller {
     'encr_password' => $verification_key
    );
    $id = $this->register_model->insert($data);
-  
+   redirect('login');
   }
   else
   {
